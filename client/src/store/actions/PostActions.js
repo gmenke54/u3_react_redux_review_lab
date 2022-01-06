@@ -1,5 +1,10 @@
-import { GetPosts, GetReviews, PostReview } from '../../services/PostService';
-import { GET_POSTS, GET_REVIEWS, ADD_REVIEW } from '../types';
+import {
+  GetPosts,
+  GetReviews,
+  PostReview,
+  PutPost
+} from '../../services/PostService';
+import { GET_POSTS, GET_REVIEWS, ADD_REVIEW, UPDATE_POST } from '../types';
 
 export const LoadPosts = () => {
   // new format for this is required to return an object to state rather than a promise
@@ -43,6 +48,20 @@ export const CreateReview = (rev) => {
       dispatch({
         type: ADD_REVIEW,
         payload: rev
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const UpdatePost = (upd, id) => {
+  return async (dispatch) => {
+    try {
+      await PutPost(upd, id);
+      dispatch({
+        type: UPDATE_POST,
+        payload: upd
       });
     } catch (error) {
       throw error;

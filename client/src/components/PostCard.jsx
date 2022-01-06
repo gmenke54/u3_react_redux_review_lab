@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { UpdatePost } from '../store/actions/PostActions';
+
+const mapStateToProps = ({ postState }) => {
+  return { postState };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updatePost: (upd, id) => dispatch(UpdatePost(upd, id))
+  };
+};
 
 const PostCard = (props) => {
   // const [renderDetails, setRenderDetails] = useState(false);
-
   // const toggleDetails = () => {
   //   if (renderDetails === true) {
   //     setRenderDetails(false);
@@ -11,7 +22,15 @@ const PostCard = (props) => {
   //     setRenderDetails(true);
   //   }
   // };
-
+  
+  const incrementLikes = () => {
+    let curLikes = parseInt(props.post.likes)
+    let newLikes = curLikes + 1
+    let update = { "likes": newLikes }
+    let curId = props.post._id
+    props.updatePost(update, curId)
+  }
+  
   return (
     <div className="post-card">
       <Link to={`/posts/${props.post._id}`}>
@@ -22,6 +41,8 @@ const PostCard = (props) => {
         src={props.post.url}
       />
       <div>{props.post.description}</div>
+      <button onClick={incrementLikes}>Like</button>
+      <div>Likes: {props.post.likes}</div>
       {/* <div>
         {renderDetails === true ? (
           <section className="details">
@@ -42,4 +63,4 @@ const PostCard = (props) => {
   );
 };
 
-export default PostCard;
+export default connect(mapStateToProps, mapDispatchToProps)(PostCard);

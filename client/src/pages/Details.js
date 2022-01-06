@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { LoadReviews } from '../store/actions/PostActions';
+import { LoadReviews, CreateReview } from '../store/actions/PostActions';
 import AddReview from '../components/AddReview';
 
 const mapStateToProps = ({ reviewState }) => {
@@ -9,7 +9,8 @@ const mapStateToProps = ({ reviewState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchReviews: (id) => dispatch(LoadReviews(id))
+    fetchReviews: (id) => dispatch(LoadReviews(id)),
+    addReview: (rev) => dispatch(CreateReview(rev))
   };
 };
 
@@ -27,7 +28,13 @@ const Details = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    props.addTodo(props.todoState.newTodo);
+    props.addReview(curReview);
+    let anotherReview = {
+      name: ``,
+      comments: ``,
+      ratings: ``
+    };
+    setCurReview(anotherReview);
   };
 
   const handle = (e) => {

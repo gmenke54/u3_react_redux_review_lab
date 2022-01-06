@@ -17,3 +17,11 @@ export const GetReviews = async (id) => {
     throw error;
   }
 };
+
+export const PostReview = async (rev) => {
+  try {
+    await axios.post(`http://localhost:3001/api/reviews`, rev);
+  } catch (error) {
+    throw error;
+  }
+};

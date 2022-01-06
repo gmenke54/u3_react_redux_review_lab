@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { UpdatePost } from '../store/actions/PostActions';
+import { UpdatePost, LoadPosts } from '../store/actions/PostActions';
 
 const mapStateToProps = ({ postState }) => {
   return { postState };
@@ -9,7 +9,8 @@ const mapStateToProps = ({ postState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updatePost: (upd, id) => dispatch(UpdatePost(upd, id))
+    updatePost: (upd, id) => dispatch(UpdatePost(upd, id)),
+    fetchPosts: () => dispatch(LoadPosts())
   };
 };
 
@@ -29,6 +30,7 @@ const PostCard = (props) => {
     let update = { "likes": newLikes }
     let curId = props.post._id
     props.updatePost(update, curId)
+    props.fetchPosts()
   }
   
   return (

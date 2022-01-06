@@ -58,10 +58,10 @@ export const CreateReview = (rev) => {
 export const UpdatePost = (upd, id) => {
   return async (dispatch) => {
     try {
-      await PutPost(upd, id);
+      const updatedPost = await PutPost(upd, id);
       dispatch({
         type: UPDATE_POST,
-        payload: upd
+        payload: updatedPost
       });
     } catch (error) {
       throw error;

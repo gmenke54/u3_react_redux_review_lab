@@ -28,7 +28,12 @@ export const PostReview = async (rev) => {
 
 export const PutPost = async (upd, id) => {
   try {
-    await axios.put(`http://localhost:3001/api/posts/details/${id}`, upd);
+    const res = await axios.put(
+      `http://localhost:3001/api/posts/details/${id}`,
+      upd
+    );
+    console.log(res);
+    return res.data;
   } catch (error) {
     throw error;
   }

@@ -45,14 +45,14 @@ const getReviewsbyPost = async (req, res) => {
 const updatePost = async (req, res) => {
   try {
     const { _id } = req.params;
-    await Post.findByIdAndUpdate(_id, req.body, { new: true }, (err, team) => {
+    await Post.findByIdAndUpdate(_id, req.body, { new: true }, (err, post) => {
       if (err) {
         res.status(500).send(err);
       }
-      if (!team) {
+      if (!post) {
         res.status(500).send('Post not found!');
       }
-      return res.status(200).json(team);
+      return res.status(200).json(post);
     });
   } catch (error) {}
 };

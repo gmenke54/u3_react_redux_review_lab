@@ -5,3 +5,6 @@
 .poster {
   width: 90vw;
 }
+.poster:hover {
+  opacity: 0.8;
+}

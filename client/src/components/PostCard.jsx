@@ -31,16 +31,27 @@ const PostCard = (props) => {
     let curId = props.post._id
     props.updatePost(update, curId)
   }
+
+  const incrementLikesPic = () => {
+    let curLikes = parseInt(props.post.likes)
+    let newLikes = curLikes + 1
+    let update = { "likes": newLikes }
+    let curId = props.post._id
+    props.updatePost(update, curId)
+  }
   
   return (
     <div className="post-card">
       <Link to={`/posts/${props.post._id}`}>
-        {props.post.name}
+        <div>
+          {props.post.name}
+          <img onDoubleClick={incrementLikesPic}
+            className="poster"
+            src={props.post.url}
+          />
+        </div>
+        
       </Link>
-      <img
-        className="poster"
-        src={props.post.url}
-      />
       <div>{props.post.description}</div>
       <button onClick={incrementLikes}>Like</button>
       <div>Likes: {props.post.likes}</div>

@@ -9,6 +9,7 @@ import { GET_POSTS, GET_REVIEWS, ADD_REVIEW, UPDATE_POST } from '../types';
 export const LoadPosts = () => {
   // new format for this is required to return an object to state rather than a promise
   return async (dispatch) => {
+    console.log('apple');
     try {
       // axios call to get departments:
       const posts = await GetPosts();

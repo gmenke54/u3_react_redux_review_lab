@@ -4,18 +4,20 @@ import ReviewCard from '../components/ReviewCard';
 import {
   LoadReviews,
   CreateReview,
-  DeleteReview
+  DeleteReview,
+  LoadPost
 } from '../store/actions/PostActions';
 
-const mapStateToProps = ({ reviewState }) => {
-  return { reviewState };
+const mapStateToProps = ({ reviewState, postState }) => {
+  return { reviewState, postState };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchReviews: (id) => dispatch(LoadReviews(id)),
     addReview: (rev) => dispatch(CreateReview(rev)),
-    deleteReview: (id) => dispatch(DeleteReview(id))
+    deleteReview: (id) => dispatch(DeleteReview(id)),
+    fetchPost: (id) => dispatch(LoadPost(id))
   };
 };
 
@@ -29,6 +31,7 @@ const Details = (props) => {
 
   useEffect(() => {
     props.fetchReviews(props.match.params.id);
+    props.fetchPost(props.match.params.id);
   }, [props.match.params.id]);
 
   const submit = (e) => {
@@ -47,14 +50,11 @@ const Details = (props) => {
     newestReview[e.target.id] = e.target.value;
     setCurReview(newestReview);
     console.log(newestReview);
-    // props.createTodo(e.target.value);
   };
 
   return (
     <div>
-      {/* BONUS: DISPLAY LOCATION NAME HERE */}
-      <h1>Reviews</h1>
-      {/* <div>{props.match.params.id}</div> */}
+      <h1>{props.postState.curPost.name} Reviews</h1>
       {props.reviewState.reviews.map((review) => (
         <div key={review._id} className="revs-cont">
           <ReviewCard review={review} />

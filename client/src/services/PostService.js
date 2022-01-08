@@ -45,3 +45,14 @@ export const DelReview = async (id) => {
     throw error;
   }
 };
+
+export const GetPost = async (id) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3001/api/posts/details/${id}`
+    );
+    return res.data.post;
+  } catch (error) {
+    throw error;
+  }
+};

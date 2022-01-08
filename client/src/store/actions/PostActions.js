@@ -3,20 +3,22 @@ import {
   GetReviews,
   PostReview,
   PutPost,
-  DelReview
+  DelReview,
+  GetPost
 } from '../../services/PostService';
 import {
   GET_POSTS,
   GET_REVIEWS,
   ADD_REVIEW,
   UPDATE_POST,
-  DEL_REVIEW
+  DEL_REVIEW,
+  GET_POST
 } from '../types';
 
 export const LoadPosts = () => {
   // new format for this is required to return an object to state rather than a promise
   return async (dispatch) => {
-    console.log('apple');
+    // console.log('apple');
     try {
       // axios call to get departments:
       const posts = await GetPosts();
@@ -37,7 +39,7 @@ export const LoadReviews = (id) => {
   return async (dispatch) => {
     try {
       const reviews = await GetReviews(id);
-      console.log(reviews);
+      // console.log(reviews);
       dispatch({
         type: GET_REVIEWS,
         payload: reviews
@@ -86,6 +88,24 @@ export const DeleteReview = (id) => {
         payload: id
       });
     } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const LoadPost = (id) => {
+  return async (dispatch) => {
+    try {
+      // axios call to get departments:
+      const post = await GetPost(id);
+      // console.log(post);
+      // set state of the departments:
+      dispatch({
+        type: GET_POST,
+        payload: post
+      });
+    } catch (error) {
+      // catch/throw error stops 1 error from breaking the entire program; instead, it only breaks that component
       throw error;
     }
   };

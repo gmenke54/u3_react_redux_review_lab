@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { GetReviews } from '../services/PostService';
 import { LoadReviews, CreateReview } from '../store/actions/PostActions';
 
 const mapStateToProps = ({ reviewState }) => {
@@ -20,9 +22,16 @@ const Reviews = (props) => {
     ratings: ``,
     post_id: props.cur_post_id
   });
+  const [reviews, setReviews] = useState([])
+
+  const pullReviews = async () => {
+    const res = await axios.get(`http://localhost:3001/api/reviews/${props.cur_post_id}`)
+    setReviews(res.data.reviews)
+  }
 
   useEffect(() => {
-    props.fetchReviews(props.cur_post_id);
+    // props.fetchReviews(props.cur_post_id);
+    pullReviews()
   }, [props.cur_post_id, curReview]);
 
   const submit = (e) => {
@@ -46,10 +55,8 @@ const Reviews = (props) => {
 
   return (
     <div>
-      {/* BONUS: DISPLAY LOCATION NAME HERE */}
       <h1>Reviews</h1>
-      <div>cur_post_id: {props.cur_post_id}</div>
-      {props.reviewState.reviews.map((review) => (
+      {reviews.map((review) => (
         <ul key={review._id}>
           "{review.comments}" - {review.ratings}/5 Stars
         </ul>
@@ -94,3 +101,4 @@ const Reviews = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reviews);
+// export default Reviews

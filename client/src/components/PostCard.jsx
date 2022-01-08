@@ -57,7 +57,7 @@ const PostCard = (props) => {
       <div>{props.post.description}</div>
       <button onClick={incrementLikes}>Like</button>
       <div>Likes: {props.post.likes}</div>
-      {/* <Reviews cur_post_id = {props.post._id} /> */}
+      <Reviews cur_post_id = {props.post._id} />
       {/* <AddReview cur_post_id = {props.post._id} /> */}
       {/* <div>
         {renderDetails === true ? (

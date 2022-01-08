@@ -1,8 +1,14 @@
-const { POST_LOADING_TYPE, GET_POSTS, UPDATE_POST } = require('../types');
+const {
+  POST_LOADING_TYPE,
+  GET_POSTS,
+  UPDATE_POST,
+  GET_POST
+} = require('../types');
 
 const iState = {
   posts: [],
-  postsLoading: '' // Should be type enum('Loading', 'Loaded', 'Inactive')
+  postsLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive')
+  curPost: {}
 };
 
 const PostReducer = (state = iState, action) => {
@@ -18,12 +24,15 @@ const PostReducer = (state = iState, action) => {
       let targetPost = {};
       updatedPosts.map((post) => {
         if (post._id === action.payload._id) {
-          console.log('found');
+          // console.log('found');
           targetPost = post;
         }
       });
       targetPost.likes++;
       return { ...state };
+    case GET_POST:
+      // console.log(action.payload);
+      return { ...state, curPost: action.payload };
     default:
       return { ...state };
   }

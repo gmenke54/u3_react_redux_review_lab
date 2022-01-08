@@ -37,3 +37,11 @@ export const PutPost = async (upd, id) => {
     throw error;
   }
 };
+
+export const DelReview = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3001/api/reviews/details/${id}`);
+  } catch (error) {
+    throw error;
+  }
+};

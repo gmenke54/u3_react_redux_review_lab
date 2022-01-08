@@ -2,9 +2,16 @@ import {
   GetPosts,
   GetReviews,
   PostReview,
-  PutPost
+  PutPost,
+  DelReview
 } from '../../services/PostService';
-import { GET_POSTS, GET_REVIEWS, ADD_REVIEW, UPDATE_POST } from '../types';
+import {
+  GET_POSTS,
+  GET_REVIEWS,
+  ADD_REVIEW,
+  UPDATE_POST,
+  DEL_REVIEW
+} from '../types';
 
 export const LoadPosts = () => {
   // new format for this is required to return an object to state rather than a promise
@@ -63,6 +70,20 @@ export const UpdatePost = (upd, id) => {
       dispatch({
         type: UPDATE_POST,
         payload: updatedPost
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const DeleteReview = (id) => {
+  return async (dispatch) => {
+    try {
+      await DelReview(id);
+      dispatch({
+        type: DEL_REVIEW,
+        payload: id
       });
     } catch (error) {
       throw error;

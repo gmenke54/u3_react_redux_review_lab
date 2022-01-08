@@ -8,3 +8,13 @@
 .poster:hover {
   opacity: 0.8;
 }
+
+.rev-card {
+  display: flex;
+}
+
+.revs-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

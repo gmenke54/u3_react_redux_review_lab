@@ -5,3 +5,4 @@ export const REVIEW_LOADING_TYPE = 'REVIEW_LOADING_TYPE';
 export const NEW_REVIEW = 'NEW_REVIEW';
 export const ADD_REVIEW = 'ADD_REVIEW';
 export const UPDATE_POST = 'UPDATE_POST';
+export const DEL_REVIEW = 'DEL_REVIEW';

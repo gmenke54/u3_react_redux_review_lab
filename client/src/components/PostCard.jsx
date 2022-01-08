@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { UpdatePost, LoadPosts } from '../store/actions/PostActions';
+import Reviews from './Reviews';
 
 const mapStateToProps = ({ postState }) => {
   return { postState };
@@ -25,6 +26,7 @@ const PostCard = (props) => {
   // };
   
   const incrementLikes = () => {
+    console.log('running incrementLikes')
     let curLikes = parseInt(props.post.likes)
     let newLikes = curLikes + 1
     let update = { "likes": newLikes }
@@ -55,6 +57,8 @@ const PostCard = (props) => {
       <div>{props.post.description}</div>
       <button onClick={incrementLikes}>Like</button>
       <div>Likes: {props.post.likes}</div>
+      {/* <Reviews cur_post_id = {props.post._id} /> */}
+      {/* <AddReview cur_post_id = {props.post._id} /> */}
       {/* <div>
         {renderDetails === true ? (
           <section className="details">

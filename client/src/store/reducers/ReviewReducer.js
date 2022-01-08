@@ -2,7 +2,8 @@ const {
   REVIEW_LOADING_TYPE,
   GET_REVIEWS,
   NEW_REVIEW,
-  ADD_REVIEW
+  ADD_REVIEW,
+  DEL_REVIEW
 } = require('../types');
 
 const iState = {
@@ -21,6 +22,16 @@ const ReviewReducer = (state = iState, action) => {
       return { ...state, newReview: action.payload };
     case ADD_REVIEW:
       return { ...state, reviews: [...state.reviews, action.payload] };
+    case DEL_REVIEW:
+      let updatedReviews = state.reviews;
+      let targetIndex = {};
+      updatedReviews.map((review, index) => {
+        if (review._id === action.payload) {
+          targetIndex = index;
+        }
+      });
+      updatedReviews.splice(targetIndex, 1);
+      return { ...state, reviews: updatedReviews };
     default:
       return { ...state };
   }

@@ -14,4 +14,8 @@ router.put('/posts/details/:_id', controllers.updatePost);
 
 router.get('/reviews/:post_id', controllers.getReviewsbyPost);
 
+router.get('/posts/details/:_id', controllers.getPostById);
+
+router.delete('/reviews/details/:_id', controllers.deleteReview);
+
 module.exports = router;

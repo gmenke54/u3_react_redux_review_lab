@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import ReviewCard from '../components/ReviewCard';
-import {
-  LoadReviews,
-  CreateReview,
-  DeleteReview
-} from '../store/actions/PostActions';
+import { LoadReviews, CreateReview } from '../store/actions/PostActions';
 
 const mapStateToProps = ({ reviewState }) => {
   return { reviewState };
@@ -14,22 +9,21 @@ const mapStateToProps = ({ reviewState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchReviews: (id) => dispatch(LoadReviews(id)),
-    addReview: (rev) => dispatch(CreateReview(rev)),
-    deleteReview: (id) => dispatch(DeleteReview(id))
+    addReview: (rev) => dispatch(CreateReview(rev))
   };
 };
 
-const Details = (props) => {
+const Reviews = (props) => {
   const [curReview, setCurReview] = useState({
     name: ``,
     comments: ``,
     ratings: ``,
-    post_id: props.match.params.id
+    post_id: props.cur_post_id
   });
 
   useEffect(() => {
-    props.fetchReviews(props.match.params.id);
-  }, [props.match.params.id]);
+    props.fetchReviews(props.cur_post_id);
+  }, [props.cur_post_id, curReview]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -54,11 +48,11 @@ const Details = (props) => {
     <div>
       {/* BONUS: DISPLAY LOCATION NAME HERE */}
       <h1>Reviews</h1>
-      {/* <div>{props.match.params.id}</div> */}
+      <div>cur_post_id: {props.cur_post_id}</div>
       {props.reviewState.reviews.map((review) => (
-        <div key={review._id} className="revs-cont">
-          <ReviewCard review={review} />
-        </div>
+        <ul key={review._id}>
+          "{review.comments}" - {review.ratings}/5 Stars
+        </ul>
       ))}
       <div className="review-form">
         <form onSubmit={(e) => submit(e)}>
@@ -99,4 +93,4 @@ const Details = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Details);
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);

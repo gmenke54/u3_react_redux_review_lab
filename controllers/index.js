@@ -1,6 +1,5 @@
 const Post = require('../models/post');
 const Review = require('../models/review');
-const { process_params } = require('express/lib/router');
 
 const getAllPosts = async (req, res) => {
   try {

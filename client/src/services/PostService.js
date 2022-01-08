@@ -20,7 +20,8 @@ export const GetReviews = async (id) => {
 
 export const PostReview = async (rev) => {
   try {
-    await axios.post(`http://localhost:3001/api/reviews`, rev);
+    const res = await axios.post(`http://localhost:3001/api/reviews`, rev);
+    return res.data.review;
   } catch (error) {
     throw error;
   }

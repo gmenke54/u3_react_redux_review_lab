@@ -8,14 +8,14 @@ const mapStateToProps = ({ reviewState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteReview: (id) => dispatch(DeleteReview(id))
+    deleteReview: (rev) => dispatch(DeleteReview(rev))
   };
 };
 
 const ReviewCard = (props) => {
 
-  const handleDelete = (revId) => {
-    props.deleteReview(revId);
+  const handleDelete = (rev) => {
+    props.deleteReview(rev);
   };
 
   return (
@@ -23,7 +23,7 @@ const ReviewCard = (props) => {
       <div>
         "{props.review.comments}" - {props.review.ratings}/5 Stars{' '}
       </div>
-      <button onClick={() => handleDelete(props.review._id)}>del</button>
+      <button onClick={() => handleDelete(props.review)}>del</button>
     </div>
   );
 };

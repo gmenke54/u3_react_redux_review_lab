@@ -40,7 +40,8 @@ const Reviews = (props) => {
     let anotherReview = {
       name: ``,
       comments: ``,
-      ratings: ``
+      ratings: ``,
+      post_id: props.cur_post_id
     };
     setCurReview(anotherReview);
   };
@@ -50,7 +51,6 @@ const Reviews = (props) => {
     newestReview[e.target.id] = e.target.value;
     setCurReview(newestReview);
     console.log(newestReview);
-    // props.createTodo(e.target.value);
   };
 
   return (

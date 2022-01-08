@@ -53,11 +53,11 @@ export const LoadReviews = (id) => {
 export const CreateReview = (rev) => {
   return async (dispatch) => {
     try {
-      await PostReview(rev);
+      const newRev = await PostReview(rev);
       console.log('created the review');
       dispatch({
         type: ADD_REVIEW,
-        payload: rev
+        payload: newRev
       });
     } catch (error) {
       throw error;
@@ -79,13 +79,13 @@ export const UpdatePost = (upd, id) => {
   };
 };
 
-export const DeleteReview = (id) => {
+export const DeleteReview = (rev) => {
   return async (dispatch) => {
     try {
-      await DelReview(id);
+      await DelReview(rev._id);
       dispatch({
         type: DEL_REVIEW,
-        payload: id
+        payload: rev
       });
     } catch (error) {
       throw error;

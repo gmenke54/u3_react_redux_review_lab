@@ -26,7 +26,7 @@ const ReviewReducer = (state = iState, action) => {
       let updatedReviews = state.reviews;
       let targetIndex = {};
       updatedReviews.map((review, index) => {
-        if (review._id === action.payload) {
+        if (review._id === action.payload._id) {
           targetIndex = index;
         }
       });

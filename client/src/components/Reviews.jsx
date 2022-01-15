@@ -44,6 +44,7 @@ const Reviews = (props) => {
       post_id: props.cur_post_id
     };
     setCurReview(anotherReview);
+    pullReviews();
   };
 
   const handle = (e) => {
